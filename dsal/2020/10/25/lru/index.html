@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>lru 算法 | Blog</title>
+    <meta name="generator" content="VuePress 1.7.0">
+    
+    <meta name="description" content="
+题目描述
+
+> 运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
+>
+> 获取数据 get(key) - 如果关键字 (key) 存在于缓存中，则获取关键字的值（总是正数），否则返回 -1。
+> 写入数据 put(key, value) - 如果关键字已经存在，则变更其数据值；如果关键字不存 ...">
+    
+    <link rel="preload" href="/assets/css/0.styles.1866bcf8.css" as="style"><link rel="preload" href="/assets/js/app.e1bf16f2.js" as="script"><link rel="preload" href="/assets/js/9.161eabb2.js" as="script"><link rel="preload" href="/assets/js/3.b2d337bf.js" as="script"><link rel="preload" href="/assets/js/7.e61683fa.js" as="script"><link rel="prefetch" href="/assets/js/10.f4c965d3.js"><link rel="prefetch" href="/assets/js/11.7cc750e8.js"><link rel="prefetch" href="/assets/js/12.0294e21e.js"><link rel="prefetch" href="/assets/js/13.6155e5d7.js"><link rel="prefetch" href="/assets/js/14.daa03e2f.js"><link rel="prefetch" href="/assets/js/15.9038c344.js"><link rel="prefetch" href="/assets/js/16.1ec95a44.js"><link rel="prefetch" href="/assets/js/17.8a468a5e.js"><link rel="prefetch" href="/assets/js/18.91670e7f.js"><link rel="prefetch" href="/assets/js/19.e61d9fa3.js"><link rel="prefetch" href="/assets/js/20.85222958.js"><link rel="prefetch" href="/assets/js/21.4388c19f.js"><link rel="prefetch" href="/assets/js/22.626f1177.js"><link rel="prefetch" href="/assets/js/23.f904be73.js"><link rel="prefetch" href="/assets/js/24.d3a7db17.js"><link rel="prefetch" href="/assets/js/25.55a68e90.js"><link rel="prefetch" href="/assets/js/26.c767df78.js"><link rel="prefetch" href="/assets/js/27.9c7de6cc.js"><link rel="prefetch" href="/assets/js/28.9191ebf0.js"><link rel="prefetch" href="/assets/js/29.45be56b4.js"><link rel="prefetch" href="/assets/js/30.fe40f1e3.js"><link rel="prefetch" href="/assets/js/31.633262f9.js"><link rel="prefetch" href="/assets/js/32.968c31fb.js"><link rel="prefetch" href="/assets/js/4.568aecd8.js"><link rel="prefetch" href="/assets/js/5.98485bed.js"><link rel="prefetch" href="/assets/js/6.05a0d140.js"><link rel="prefetch" href="/assets/js/8.be03ada5.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.4dea3cd2.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.1866bcf8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-blog__global-layout"><section id="header-wrapper"><header id="header"><div class="header-wrapper"><div class="title"><a href="/" class="nav-link home-link">Blog </a></div> <div class="header-right-wrap"><ul class="nav"><li class="nav-item"><a href="/" class="nav-link">Blog</a></li><li class="nav-item"><a href="/tag/" class="nav-link">标签</a></li><li class="nav-item"><a href="/linux/" class="nav-link">linux</a></li><li class="nav-item"><a href="/issues/" class="nav-link">issues</a></li><li class="nav-item"><a href="/dsal/" class="nav-link router-link-active">数据结构/算法</a></li><li class="nav-item"><a href="/cs/" class="nav-link">计算机基础</a></li><li class="nav-item"><a href="/lang/" class="nav-link">语言</a></li><li class="nav-item"><a href="/relax/" class="nav-link">放松一下</a></li></ul> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></div></header></section> <div id="mobile-header"><div class="mobile-header-bar"><div class="mobile-header-title"><a href="/" class="nav-link mobile-home-link">Blog </a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div> <div class="mobile-menu-wrapper"><hr class="menu-divider"> <ul class="mobile-nav"><li class="mobile-nav-item"><a href="/" class="nav-link">Blog</a></li><li class="mobile-nav-item"><a href="/tag/" class="nav-link">标签</a></li><li class="mobile-nav-item"><a href="/linux/" class="nav-link">linux</a></li><li class="mobile-nav-item"><a href="/issues/" class="nav-link">issues</a></li><li class="mobile-nav-item"><a href="/dsal/" class="nav-link router-link-active">数据结构/算法</a></li><li class="mobile-nav-item"><a href="/cs/" class="nav-link">计算机基础</a></li><li class="mobile-nav-item"><a href="/lang/" class="nav-link">语言</a></li><li class="mobile-nav-item"><a href="/relax/" class="nav-link">放松一下</a></li> <li class="mobile-nav-item"><!----></li></ul></div></div></div> <div class="content-wrapper"><div id="vuepress-theme-blog__post-layout"><article itemscope="itemscope" itemtype="https://schema.org/BlogPosting" class="vuepress-blog-theme-content"><header><h1 itemprop="name headline" class="post-title">
+        lru 算法
+      </h1> <div class="post-meta"><div itemprop="publisher author" itemtype="http://schema.org/Person" itemscope="itemscope" class="post-meta-author"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-navigation"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg> <span itemprop="name">zz</span> <span itemprop="address">   in Beijing</span></div> <!----> <ul itemprop="keywords" class="post-meta-tags"><li class="post-tag" data-v-42ccfcd5><a href="/tag/lru" data-v-42ccfcd5><span data-v-42ccfcd5>lru</span></a></li><li class="post-tag" data-v-42ccfcd5><a href="/tag/算法" data-v-42ccfcd5><span data-v-42ccfcd5>算法</span></a></li><li class="post-tag" data-v-42ccfcd5><a href="/tag/go" data-v-42ccfcd5><span data-v-42ccfcd5>go</span></a></li></ul></div></header> <div itemprop="articleBody" class="content__default"><h1 id="lru-缓存机制-leetcode-146"><a href="#lru-缓存机制-leetcode-146" class="header-anchor">#</a> LRU 缓存机制 --- LeetCode 146</h1> <h2 id="题目描述"><a href="#题目描述" class="header-anchor">#</a> 题目描述</h2> <blockquote><p>运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。</p> <p>获取数据 get(key) - 如果关键字 (key) 存在于缓存中，则获取关键字的值（总是正数），否则返回 -1。
+写入数据 put(key, value) - 如果关键字已经存在，则变更其数据值；如果关键字不存在，则插入该组「关键字/值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。</p> <p>示例:</p> <p>LRUCache cache = new LRUCache( 2 /* 缓存容量 */ );</p> <p>cache.put(1, 1);
+cache.put(2, 2);
+cache.get(1);       // 返回  1
+cache.put(3, 3);    // 该操作会使得关键字 2 作废
+cache.get(2);       // 返回 -1 (未找到)
+cache.put(4, 4);    // 该操作会使得关键字 1 作废
+cache.get(1);       // 返回 -1 (未找到)
+cache.get(3);       // 返回  3
+cache.get(4);       // 返回  4</p> <p><strong>进阶:</strong></p> <p>你是否可以在 <strong>O(1)</strong> 时间复杂度内完成这两种操作？</p></blockquote> <p>上面的操作如下图所示：</p> <p><img src="/assets/img/liucheng.50dff521.jpg" alt=""></p> <p>通过上图应该可以大致了解 lru 的工作过程了，要想进一步了解 lru，可以自行网上查阅。</p> <h2 id="算法设计"><a href="#算法设计" class="header-anchor">#</a> 算法设计</h2> <h3 id="低效率版"><a href="#低效率版" class="header-anchor">#</a> 低效率版</h3> <p>如果忽视题目描述中的进阶要求：在 <strong>O(1)</strong> 时间复杂度内完成这两种操作，可以很容易的写出一个 lru 算法，只要通过一个链表，在链表中存储 map 即可实现，</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// ⚠️ 低效率，get 和 put 时间复杂度非 O(1)</span>
+
+<span class="token keyword">type</span> LRUCache <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	Cap <span class="token builtin">int</span>
+	Element <span class="token operator">*</span>list<span class="token punctuation">.</span>List
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">Constructor</span><span class="token punctuation">(</span>capacity <span class="token builtin">int</span><span class="token punctuation">)</span> LRUCache <span class="token punctuation">{</span>
+	l <span class="token operator">:=</span> LRUCache<span class="token punctuation">{</span>
+		Cap<span class="token punctuation">:</span>     capacity<span class="token punctuation">,</span>
+		Element<span class="token punctuation">:</span> list<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">return</span> l
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>LRUCache<span class="token punctuation">)</span> <span class="token function">Get</span><span class="token punctuation">(</span>key <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> c<span class="token punctuation">.</span>Element<span class="token punctuation">.</span><span class="token function">Front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i <span class="token operator">!=</span> <span class="token boolean">nil</span><span class="token punctuation">;</span> i <span class="token operator">=</span> i<span class="token punctuation">.</span><span class="token function">Next</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		data <span class="token operator">:=</span> i<span class="token punctuation">.</span>Value<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span>
+		<span class="token keyword">if</span> val<span class="token punctuation">,</span> ok <span class="token operator">:=</span> data<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span> ok <span class="token punctuation">{</span>
+			<span class="token comment">// 如果找到，返回的同时将其置于头部</span>
+			c<span class="token punctuation">.</span>Element<span class="token punctuation">.</span><span class="token function">MoveToFront</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+			<span class="token keyword">return</span> val
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>LRUCache<span class="token punctuation">)</span> <span class="token function">Put</span><span class="token punctuation">(</span>key <span class="token builtin">int</span><span class="token punctuation">,</span> value <span class="token builtin">int</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+	e <span class="token operator">:=</span> c<span class="token punctuation">.</span>Element
+
+	<span class="token comment">// 如果 key 已存在，则更新值，同时置于头部</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> e<span class="token punctuation">.</span><span class="token function">Front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i <span class="token operator">!=</span> <span class="token boolean">nil</span><span class="token punctuation">;</span> i <span class="token operator">=</span> i<span class="token punctuation">.</span><span class="token function">Next</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		data <span class="token operator">:=</span> i<span class="token punctuation">.</span>Value<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span>
+		<span class="token keyword">if</span> <span class="token boolean">_</span><span class="token punctuation">,</span> ok <span class="token operator">:=</span> data<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span> ok <span class="token punctuation">{</span>
+			data<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value
+			<span class="token comment">// 置于头部</span>
+			c<span class="token punctuation">.</span>Element<span class="token punctuation">.</span><span class="token function">MoveToFront</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+			<span class="token keyword">return</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">// 如果已满，则移除最后一个元素</span>
+	<span class="token keyword">if</span> e<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> c<span class="token punctuation">.</span>Cap <span class="token punctuation">{</span>
+		e<span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token function">Back</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
+
+	data <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span>
+	data<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value
+	e<span class="token punctuation">.</span><span class="token function">PushFront</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><img src="/assets/img/suc.da447b17.jpg" alt=""></p> <p>虽然通过了测试，但是效率非常低下，因为每次 get 和 put 都需要遍历链表，并且判断当前链表存储的 map 的 key，时间复杂度会非常高。</p> <p>更好的方法：</p> <p><img src="/assets/img/lru_good.bf8fb97a.jpg" alt=""></p> <p>要让 put 和 get 方法的时间复杂度为 O(1)，我们可以总结出这个数据结构必要的条件：查找快，插入快，删除快，有顺序之分。</p> <p>因为显然 cache 必须有顺序之分，以区分最近使用的和久未使用的数据；而且我们要在 cache 中查找键是否已存在；如果容量满了要删除最后一个数据；每次访问还要把数据插入到队头。</p> <p>那么，什么数据结构同时符合上述条件呢？哈希表查找快，但是数据无固定顺序；链表有顺序之分，插入删除快，但是查找慢。所以结合一下，形成一种新的数据结构：哈希链表。</p> <p>双链表中存储了一对键值对，并且 键 和 哈希表的 键 保持一致，来达到 哈希表映射双链表的目的。</p> <p>哈希表可以使查询相关操作达到 O(1) 时间复杂度，例如 get 操作，以及 put 中 判断该 key 是否以及存在；通过哈希表可以快速找到对应的链表节点，所以可以保证链表的删除操作也为 O(1) （链表删除虽然只需要改变指针，但是还需要找到该节点）。</p> <p>具体代码如下：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">type</span> LRUCache <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	<span class="token comment">// 最大容量</span>
+	<span class="token builtin">cap</span> <span class="token builtin">int</span>
+	<span class="token comment">// map 映射到 双向链表，实现 O(1) 的时间复杂度</span>
+	cache <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token operator">*</span>list<span class="token punctuation">.</span>Element
+	<span class="token comment">// 双向链表实现 lru</span>
+	list <span class="token operator">*</span>list<span class="token punctuation">.</span>List
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 该结构体作为链表的节点值，并且 key 与 cache 的 key 保持同步，</span>
+<span class="token comment">// 以此实现 map 映射到 list</span>
+<span class="token keyword">type</span> kv <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	key   <span class="token builtin">int</span>
+	value <span class="token builtin">int</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">Constructor</span><span class="token punctuation">(</span>capacity <span class="token builtin">int</span><span class="token punctuation">)</span> LRUCache <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> LRUCache<span class="token punctuation">{</span>
+		<span class="token builtin">cap</span><span class="token punctuation">:</span>   capacity<span class="token punctuation">,</span>
+		cache<span class="token punctuation">:</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token operator">*</span>list<span class="token punctuation">.</span>Element<span class="token punctuation">)</span><span class="token punctuation">,</span>
+		list<span class="token punctuation">:</span>  list<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>LRUCache<span class="token punctuation">)</span> <span class="token function">Get</span><span class="token punctuation">(</span>key <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+	<span class="token comment">// 通过 cache (map 类型) 查询 key，因为 list 节点 value 的 key 与 cache key 相同，</span>
+	<span class="token comment">// 所以可以通过 cache 以 O(1) 查询到对应的 list node</span>
+	<span class="token keyword">if</span> v<span class="token punctuation">,</span> ok <span class="token operator">:=</span> c<span class="token punctuation">.</span>cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span> ok <span class="token punctuation">{</span>
+		<span class="token comment">// 将查询到的 node 移动到 list 头部</span>
+		c<span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">MoveToFront</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+		<span class="token comment">// cache 的 value 是一个 list node，并且 node value 是 struct kv，</span>
+		<span class="token comment">// 返回 struct kv 的 value</span>
+		<span class="token keyword">return</span> v<span class="token punctuation">.</span>Value<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>kv<span class="token punctuation">)</span><span class="token punctuation">.</span>value
+	<span class="token punctuation">}</span>
+	<span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>LRUCache<span class="token punctuation">)</span> <span class="token function">Put</span><span class="token punctuation">(</span>key <span class="token builtin">int</span><span class="token punctuation">,</span> value <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token comment">// 如果该 key 已经存在，则更新 value，并置于 list 头部</span>
+	<span class="token keyword">if</span> v<span class="token punctuation">,</span> ok <span class="token operator">:=</span> c<span class="token punctuation">.</span>cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span> ok <span class="token punctuation">{</span>
+		<span class="token comment">// 更新位置</span>
+		c<span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">MoveToFront</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+		<span class="token comment">// 更新 value</span>
+		v<span class="token punctuation">.</span>Value <span class="token operator">=</span> <span class="token operator">&amp;</span>kv<span class="token punctuation">{</span>
+			key<span class="token punctuation">:</span>   key<span class="token punctuation">,</span>
+			value<span class="token punctuation">:</span> value<span class="token punctuation">,</span>
+		<span class="token punctuation">}</span>
+		<span class="token comment">// 该 key 不存在</span>
+	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+		<span class="token comment">// 如果已经达到最大容量</span>
+		<span class="token keyword">if</span> c<span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> c<span class="token punctuation">.</span><span class="token builtin">cap</span> <span class="token punctuation">{</span>
+			<span class="token comment">// 删除 cache 中处于末尾的 key</span>
+			<span class="token function">delete</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>cache<span class="token punctuation">,</span> c<span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">Back</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>kv<span class="token punctuation">)</span><span class="token punctuation">.</span>key<span class="token punctuation">)</span>
+			<span class="token comment">// 删除 list 中最后一个 node</span>
+			c<span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">Back</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+		<span class="token punctuation">}</span>
+		<span class="token comment">// 还有剩余容量</span>
+		e <span class="token operator">:=</span> <span class="token operator">&amp;</span>kv<span class="token punctuation">{</span>
+			key<span class="token punctuation">:</span>   key<span class="token punctuation">,</span>
+			value<span class="token punctuation">:</span> value<span class="token punctuation">,</span>
+		<span class="token punctuation">}</span>
+		<span class="token comment">// 置于 list 头部</span>
+		c<span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">PushFront</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+		<span class="token comment">// value 取 list 首元素</span>
+		c<span class="token punctuation">.</span>cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> c<span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">Front</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><img src="/assets/img/lru_suc_better.77899ebd.jpg" alt=""></p> <p>可以看到执行耗时缩短了近 7 倍。</p> <p>注：go 官方有一个分布式 kv缓存库，里面有 lru 的实现方式，地址如下：</p> <p>https://github.com/golang/groupcache/blob/master/lru/lru.go</p> <!----></div> <footer><!----> <hr> <!----></footer></article> <div class="sticker vuepress-toc"><div class="vuepress-toc-item vuepress-toc-h2 active"><a href="#题目描述" title="题目描述">题目描述</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#算法设计" title="算法设计">算法设计</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#低效率版" title="低效率版">低效率版</a></div></div></div></div> <footer class="footer" data-v-fdbf4940><div class="footer-left-wrap" data-v-fdbf4940><ul class="contact" data-v-fdbf4940><li class="contact-item" data-v-fdbf4940><a href="https://github.com/vuejs/vuepress" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-fdbf4940><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github" data-v-fdbf4940><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" data-v-fdbf4940></path></svg>
+          
+        </a></li><li class="contact-item" data-v-fdbf4940><a href="https://github.com/vuejs/vuepress" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-fdbf4940><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter" data-v-fdbf4940><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" data-v-fdbf4940></path></svg>
+          
+        </a></li></ul></div> <div class="footer-right-wrap" data-v-fdbf4940><ul class="copyright" data-v-fdbf4940><li class="copyright-item" data-v-fdbf4940><a href="https://policies.google.com/privacy?hl=en-US" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-fdbf4940>Privacy Policy</a></li><li class="copyright-item" data-v-fdbf4940><a href="/dsal/2020/10/25/lru/.html" class="nav-link" data-v-fdbf4940>MIT Licensed | Copyright © 2018-present Vue.js</a></li></ul></div></footer></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.e1bf16f2.js" defer></script><script src="/assets/js/9.161eabb2.js" defer></script><script src="/assets/js/3.b2d337bf.js" defer></script><script src="/assets/js/7.e61683fa.js" defer></script>
+  </body>
+</html>

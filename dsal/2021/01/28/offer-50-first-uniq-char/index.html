@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>剑指 Offer 03. 数组中重复的数字 | Blog</title>
+    <meta name="generator" content="VuePress 1.7.0">
+    
+    <meta name="description" content="找出数组中重复的数字。
+>
+>
+> 在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
+>
+> 示例 1：
+>
+> 输入：
+> [2, 3, 1, 0, 2, 5, 3]
+> 输出：2 或 3
+>
+>
+> 限制：
+>
+> 2 <= n <= 100000
+ ...">
+    
+    <link rel="preload" href="/assets/css/0.styles.1866bcf8.css" as="style"><link rel="preload" href="/assets/js/app.e1bf16f2.js" as="script"><link rel="preload" href="/assets/js/9.161eabb2.js" as="script"><link rel="preload" href="/assets/js/3.b2d337bf.js" as="script"><link rel="preload" href="/assets/js/24.d3a7db17.js" as="script"><link rel="prefetch" href="/assets/js/10.f4c965d3.js"><link rel="prefetch" href="/assets/js/11.7cc750e8.js"><link rel="prefetch" href="/assets/js/12.0294e21e.js"><link rel="prefetch" href="/assets/js/13.6155e5d7.js"><link rel="prefetch" href="/assets/js/14.daa03e2f.js"><link rel="prefetch" href="/assets/js/15.9038c344.js"><link rel="prefetch" href="/assets/js/16.1ec95a44.js"><link rel="prefetch" href="/assets/js/17.8a468a5e.js"><link rel="prefetch" href="/assets/js/18.91670e7f.js"><link rel="prefetch" href="/assets/js/19.e61d9fa3.js"><link rel="prefetch" href="/assets/js/20.85222958.js"><link rel="prefetch" href="/assets/js/21.4388c19f.js"><link rel="prefetch" href="/assets/js/22.626f1177.js"><link rel="prefetch" href="/assets/js/23.f904be73.js"><link rel="prefetch" href="/assets/js/25.55a68e90.js"><link rel="prefetch" href="/assets/js/26.c767df78.js"><link rel="prefetch" href="/assets/js/27.9c7de6cc.js"><link rel="prefetch" href="/assets/js/28.9191ebf0.js"><link rel="prefetch" href="/assets/js/29.45be56b4.js"><link rel="prefetch" href="/assets/js/30.fe40f1e3.js"><link rel="prefetch" href="/assets/js/31.633262f9.js"><link rel="prefetch" href="/assets/js/32.968c31fb.js"><link rel="prefetch" href="/assets/js/4.568aecd8.js"><link rel="prefetch" href="/assets/js/5.98485bed.js"><link rel="prefetch" href="/assets/js/6.05a0d140.js"><link rel="prefetch" href="/assets/js/7.e61683fa.js"><link rel="prefetch" href="/assets/js/8.be03ada5.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.4dea3cd2.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.1866bcf8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-blog__global-layout"><section id="header-wrapper"><header id="header"><div class="header-wrapper"><div class="title"><a href="/" class="nav-link home-link">Blog </a></div> <div class="header-right-wrap"><ul class="nav"><li class="nav-item"><a href="/" class="nav-link">Blog</a></li><li class="nav-item"><a href="/tag/" class="nav-link">标签</a></li><li class="nav-item"><a href="/linux/" class="nav-link">linux</a></li><li class="nav-item"><a href="/issues/" class="nav-link">issues</a></li><li class="nav-item"><a href="/dsal/" class="nav-link router-link-active">数据结构/算法</a></li><li class="nav-item"><a href="/cs/" class="nav-link">计算机基础</a></li><li class="nav-item"><a href="/lang/" class="nav-link">语言</a></li><li class="nav-item"><a href="/relax/" class="nav-link">放松一下</a></li></ul> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></div></header></section> <div id="mobile-header"><div class="mobile-header-bar"><div class="mobile-header-title"><a href="/" class="nav-link mobile-home-link">Blog </a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div> <div class="mobile-menu-wrapper"><hr class="menu-divider"> <ul class="mobile-nav"><li class="mobile-nav-item"><a href="/" class="nav-link">Blog</a></li><li class="mobile-nav-item"><a href="/tag/" class="nav-link">标签</a></li><li class="mobile-nav-item"><a href="/linux/" class="nav-link">linux</a></li><li class="mobile-nav-item"><a href="/issues/" class="nav-link">issues</a></li><li class="mobile-nav-item"><a href="/dsal/" class="nav-link router-link-active">数据结构/算法</a></li><li class="mobile-nav-item"><a href="/cs/" class="nav-link">计算机基础</a></li><li class="mobile-nav-item"><a href="/lang/" class="nav-link">语言</a></li><li class="mobile-nav-item"><a href="/relax/" class="nav-link">放松一下</a></li> <li class="mobile-nav-item"><!----></li></ul></div></div></div> <div class="content-wrapper"><div id="vuepress-theme-blog__post-layout"><article itemscope="itemscope" itemtype="https://schema.org/BlogPosting" class="vuepress-blog-theme-content"><header><h1 itemprop="name headline" class="post-title">
+        剑指 Offer 03. 数组中重复的数字
+      </h1> <div class="post-meta"><div itemprop="publisher author" itemtype="http://schema.org/Person" itemscope="itemscope" class="post-meta-author"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-navigation"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg> <span itemprop="name">zz</span> <span itemprop="address">   in Beijing</span></div> <!----> <ul itemprop="keywords" class="post-meta-tags"><li class="post-tag" data-v-42ccfcd5><a href="/tag/数组" data-v-42ccfcd5><span data-v-42ccfcd5>数组</span></a></li><li class="post-tag" data-v-42ccfcd5><a href="/tag/算法" data-v-42ccfcd5><span data-v-42ccfcd5>算法</span></a></li><li class="post-tag" data-v-42ccfcd5><a href="/tag/哈希表" data-v-42ccfcd5><span data-v-42ccfcd5>哈希表</span></a></li></ul></div></header> <div itemprop="articleBody" class="content__default"><blockquote><p>找出数组中重复的数字。</p> <p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p> <p>示例 1：</p> <p>输入：
+[2, 3, 1, 0, 2, 5, 3]
+输出：2 或 3</p> <p>限制：</p> <p>2 &lt;= n &lt;= 100000</p></blockquote> <h4 id="方法1-哈希表"><a href="#方法1-哈希表" class="header-anchor">#</a> 方法1：哈希表</h4> <p>看到这种寻找重复元素的题目，首先想到的就是哈希表，通过 map 的 key 可以很容易的找到重复元素：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">findRepeatNumber</span><span class="token punctuation">(</span>nums <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    m <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token function">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 如果该 key 已存在，说明重复</span>
+        <span class="token keyword">if</span> <span class="token boolean">_</span><span class="token punctuation">,</span> ok <span class="token operator">:=</span> m<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> ok <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+        m<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 执行用时: 40 ms</span>
+<span class="token comment">// 内存消耗: 9.6 MB</span>
+</code></pre></div><p>复杂度分析：
+时间复杂度 O(N) ： 遍历数组使用 O(N) ，map 添加与查找元素皆为 O(1) 。
+空间复杂度 O(N) ： map 占用 O(N) 大小的额外空间。</p> <h4 id="方法2-排序"><a href="#方法2-排序" class="header-anchor">#</a> 方法2：排序</h4> <p>对数组排序后，看相邻元素是否有相同的：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">findRepeatNumber</span><span class="token punctuation">(</span>nums <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+  	<span class="token comment">// 先排序</span>
+    sort<span class="token punctuation">.</span><span class="token function">Slice</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> <span class="token keyword">func</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token function">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> nums<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 执行用时: 48 ms</span>
+<span class="token comment">// 内存消耗: 8.7 MB</span>
+</code></pre></div><p>复杂度分析：
+时间复杂度 O(NlogN) ： 排序的时间复杂度为 O(NlogN)
+空间复杂度 O(1) ： 无需额外空间</p> <h4 id="方法3-原地置换、原地哈希"><a href="#方法3-原地置换、原地哈希" class="header-anchor">#</a> 方法3：原地置换、原地哈希</h4> <p>题干中有一句很重要的话：<em><strong>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内</strong></em>，这说明了每个元素都可以存放在其值下标处（例如 2 可以存在 nums[2]，5 可以存在 nums[5]）,我们可以使用某种方法，将每个元素放到其对应位置，实现一个哈希表，哈希表的 key 是数组下标，value 是与下标相同的值，例如：</p> <p><img src="https://zkept-1302605083.cos.ap-nanjing.myqcloud.com/LeetCode/office_03_hash.jpg" alt=""></p> <p>当 key 发生冲突时，说明该元素是我们要找的重复数，但是用什么方法使每个元素移动到其对应位置呢?</p> <p>这里可以使用原地置换法，首先判断 i 是否等于 nums[i]，不是的话则继续判断 nums[i] 是否等于 nums[nums[i]]，如果相等，则说明发生了冲突，该数为重复数，直接返回，否则交换两个位置的值（swap(nums[i], nums[nums[i]]) ），如果 i 等于 nums[i]，则说明 nums[i] 已经放在了对应的位置，此时可以i++，重复上述步骤，直到 i &gt; len(nums) 或者 return。</p> <p>算法流程：</p> <ol><li>遍历数组 numsnums ，设索引初始值为 i = 0 :
+<ol><li>若 nums[i] = i ： 说明此数字已在对应索引位置，无需交换，因此跳过；</li> <li>若 nums[nums[i]] = nums[i] ： 代表索引 nums[i] 处和索引 i 处的元素值都为 nums[i] ，即找      到一组重复值，返回此值 nums[i] ；</li> <li>否则： 交换索引为 i 和 nums[i] 的元素值，将此数字交换至对应索引位置。</li></ol></li> <li>若遍历完毕尚未返回，则返回 -1 。</li></ol> <p>文字可能不太好理解，结合下面的图帮助理解：</p> <p><img src="https://zkept-1302605083.cos.ap-nanjing.myqcloud.com/LeetCode/office_03.png" alt=""></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">findRepeatNumber</span><span class="token punctuation">(</span>nums <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    i <span class="token operator">:=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> i <span class="token operator">&lt;</span> <span class="token function">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> i <span class="token operator">==</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+            i<span class="token operator">++</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+        nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 执行用时: 36 ms</span>
+<span class="token comment">// 内存消耗: 8.7 MB</span>
+
+</code></pre></div><p>复杂度分析：
+时间复杂度 O(N) ： 遍历数组使用 O(N)，每轮遍历的判断和交换操作使用 O(1)。
+空间复杂度 O(1) ： 使用常数复杂度的额外空间。</p> <!----></div> <footer><!----> <hr> <!----></footer></article> <!----></div></div> <footer class="footer" data-v-fdbf4940><div class="footer-left-wrap" data-v-fdbf4940><ul class="contact" data-v-fdbf4940><li class="contact-item" data-v-fdbf4940><a href="https://github.com/vuejs/vuepress" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-fdbf4940><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github" data-v-fdbf4940><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" data-v-fdbf4940></path></svg>
+          
+        </a></li><li class="contact-item" data-v-fdbf4940><a href="https://github.com/vuejs/vuepress" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-fdbf4940><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter" data-v-fdbf4940><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" data-v-fdbf4940></path></svg>
+          
+        </a></li></ul></div> <div class="footer-right-wrap" data-v-fdbf4940><ul class="copyright" data-v-fdbf4940><li class="copyright-item" data-v-fdbf4940><a href="https://policies.google.com/privacy?hl=en-US" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-fdbf4940>Privacy Policy</a></li><li class="copyright-item" data-v-fdbf4940><a href="/dsal/2021/01/28/offer-50-first-uniq-char/.html" class="nav-link" data-v-fdbf4940>MIT Licensed | Copyright © 2018-present Vue.js</a></li></ul></div></footer></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.e1bf16f2.js" defer></script><script src="/assets/js/9.161eabb2.js" defer></script><script src="/assets/js/3.b2d337bf.js" defer></script><script src="/assets/js/24.d3a7db17.js" defer></script>
+  </body>
+</html>
